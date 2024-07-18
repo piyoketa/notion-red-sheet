@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Notion Hover Disable",
+  "version": "1.5",
+  "description": "Notionサイトで特定の要素の色を透明にするChrome拡張",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.notion.site/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
