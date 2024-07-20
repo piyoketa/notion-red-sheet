@@ -1,8 +1,15 @@
-span[spellcheck="false"] {
-    color: transparent !important;
-    border: 1px solid #333;
-    &::before{
-        content: "◎";
-        color: black !important;
+body.memorize {
+    span[spellcheck="false"] {
+        color: transparent !important;
+        border: 1px solid #333;
+    }
+}
+
+body.printer {
+    span[spellcheck="false"] {
+        color: #ff9933 !important;
+        font-weight: 700;
+        border: 1px solid #333;
+        background-color: transparent !important;
     }
 }
