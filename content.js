@@ -23,38 +23,52 @@ function findParentDataBlockId(element) {
     return null; // 見つからなかった場合
 }
 
-// 要素が見つかるまで待機し、見つかったらスタイルを適用する
-waitForElements().then((elements) => {
+function resetElements(elements) {
     for (let i = 0; i < elements.length; i++) {
         elements[i].style.color = "transparent";
 
         // 左クリックイベントを設定
-        elements[i].onclick = function() {
-        if (this.style.color === "transparent") {
-            this.style.color = "red";
-        } else if (this.style.color === "red") {
-            this.style.color = "transparent";
-        }
+        elements[i].onclick = function(event) {
+            if (this.style.color === "transparent") {
+                this.style.setProperty('color', 'red', 'important');
+            } else if (this.style.color === "red") {
+                this.style.setProperty('color', 'transparent', 'important');
+            }
+        };
 
         // 右クリックイベントを設定
-        elements[i].oncontextmenu = function(event) {
+        elements[i].oncontextmenu = async function(event) {
             event.preventDefault();
             dataBlockId = findParentDataBlockId(event.target);
 
-            chrome.storage.local.set({ "title": "hello!" }).then(() => {});
-            chrome.storage.local.get("title").then((result) => {debugger;});
+            try {
+                // 現在のカウンタ値を取得
+                const dataBlockResult = await chrome.storage.local.get(dataBlockId);
+                let counter = parseInt(dataBlockResult[dataBlockId]) || 0; // カウンタが存在しない場合は0からスタート
 
-            chrome.storage.local.get([dataBlockId]).then((result) => {
-                console.log("Value currently is " + result.key);
-            });
+                // カウンタを増加
+                counter += 1;
 
-            chrome.storage.local.set({ [dataBlockId]: new Date() }).then(() => {
-                console.log("Value is set to " + 2);
-            });
-              
-            console.log(dataBlockId)
+                // 更新されたカウンタ値を保存
+                await chrome.storage.local.set({ [dataBlockId]: counter });
+
+                console.log(dataBlockId + " is " + counter);
+            } catch (error) {
+                console.error("Error accessing chrome storage:", error);
+            }
+
             return false;
-        }        
-    };
+        };
     }
+}
+
+// 要素が見つかるまで待機し、見つかったらスタイルを適用する
+waitForElements().then((elements) => {
+    resetElements(elements);
 });
+
+// document.getElementById("notionRedSheetButton").onclick = function() {
+//    let elements = document.querySelectorAll('span[spellcheck="false"]');
+//    resetElements(elements);
+//    debugger;
+// }

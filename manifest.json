@@ -6,14 +6,23 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "sidePanel"
   ],
+  "side_panel": {
+    "default_path": "sidebar.html"
+  },
+  "background":{
+    "service_worker": "background.js",    
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": [
         "https://*.notion.site/*"
       ],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "css": ["./content.css"]
     }
   ]
 }
