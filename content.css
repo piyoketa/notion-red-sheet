@@ -1,4 +1,4 @@
-body.memorize {
+body:not(.normal):not(.printer) {
     span[spellcheck="false"] {
         color: transparent !important;
         border: 1px solid #333;

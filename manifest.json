@@ -21,6 +21,7 @@
       "matches": [
         "https://*.notion.site/*"
       ],
+      "js": ["content.js"],
       "css": ["./content.css"]
     }
   ]
