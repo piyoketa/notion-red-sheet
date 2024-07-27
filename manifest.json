@@ -12,13 +12,15 @@
     "service_worker": "background.js",    
     "type": "module"
   },
+  "icons": {
+    "128": "icon128_normal.png"
+  },
   "action": {},
   "content_scripts": [
     {
       "matches": [
         "https://*.notion.site/*"
       ],
-      "js": ["content.js"],
       "css": ["./content.css"]
     }
   ]
