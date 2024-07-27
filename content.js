@@ -137,7 +137,7 @@ async function initializeElements() {
         const storageId = `${dataBlockId}_${text}`
         await chrome.storage.local.set({ [storageId]: successNum });
 
-        console.log(storageId + " is " + successNum);
+        // console.log(storageId + " is " + successNum);
       } catch (error) {
         console.error("Error accessing chrome storage:", error);
       }
@@ -160,7 +160,7 @@ async function activate() {
   if(!mode){
     mode = "memorize"
   }
-  console.log(`Notion 赤シート activate! Mode: ${mode}`);
+  console.log(`Notion 赤シート activated! Mode: ${mode}`);
 
   if (mode == "printer") {
     activatePrinterMode()

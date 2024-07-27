@@ -13,7 +13,7 @@
     "type": "module"
   },
   "icons": {
-    "128": "icon128_normal.png"
+    "128": "icon128_memorize.png"
   },
   "action": {},
   "content_scripts": [
